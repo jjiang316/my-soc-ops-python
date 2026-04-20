@@ -1,24 +1,29 @@
 <div id="game-container">
-<div class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2 uppercase tracking-widest hover-brighten">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8 uppercase tracking-wide hover-brighten">[ classified ]</p>
+<div class="flex flex-col items-center justify-center min-h-full bg-gray-50">
+    <div class="text-center max-w-sm p-6">
+        <p class="text-xs uppercase tracking-widest hover-brighten mb-6 animate-start-reveal" style="animation-delay: 0.5s">soc-ops</p>
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3 uppercase tracking-wide hover-brighten">Protocol</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li class="hover-brighten">› Locate operatives matching each dossier</li>
-                <li class="hover-brighten">› Tap to confirm visual contact</li>
-                <li class="hover-brighten">› Complete a line to extract</li>
-            </ul>
+        <div class="animate-start-reveal mb-6" style="animation-delay: 1.2s">
+            <hr class="divider-hairline">
+        </div>
+
+        <ul class="text-left text-sm space-y-2 mb-6 animate-start-reveal" style="animation-delay: 2.0s">
+            <li class="hover-brighten">locate matching operatives</li>
+            <li class="hover-brighten">tap to confirm contact</li>
+            <li class="hover-brighten">complete a line</li>
+        </ul>
+
+        <div class="animate-start-reveal mb-8" style="animation-delay: 2.8s">
+            <hr class="divider-hairline">
         </div>
 
         <button
             hx-post="/start"
             hx-target="#game-container"
             hx-swap="outerHTML"
-            class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors uppercase tracking-widest hover-brighten">
-            Initiate
+            class="uppercase tracking-widest hover-brighten hover-underline animate-start-reveal"
+            style="animation-delay: 4.2s;">
+            initiate
         </button>
     </div>
 </div>
