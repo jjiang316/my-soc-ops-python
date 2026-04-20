@@ -16,9 +16,9 @@ class TestHomePage:
 
     def test_home_contains_start_screen(self, client: TestClient) -> None:
         response = client.get("/")
-        assert "Soc Ops" in response.text
-        assert "Initiate" in response.text
-        assert "Protocol" in response.text
+        assert "soc-ops" in response.text
+        assert "initiate" in response.text
+        assert "locate matching operatives" in response.text
 
     def test_home_sets_session_cookie(self, client: TestClient) -> None:
         response = client.get("/")
@@ -57,8 +57,8 @@ class TestResetGame:
         client.post("/start")
         response = client.post("/reset")
         assert response.status_code == 200
-        assert "Initiate" in response.text
-        assert "Protocol" in response.text
+        assert "initiate" in response.text
+        assert "locate matching operatives" in response.text
 
 
 class TestDismissModal:
