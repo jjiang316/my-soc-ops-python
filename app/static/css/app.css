@@ -15,11 +15,11 @@
     --text-vis:    #3a3a3a;
     --text-bright: #4a4a4a;
 
-    /* Phosphor cyan accents */
-    --cyan-deep:   #062222;
-    --cyan-mark:   #0d3b3b;
-    --cyan-glow:   #0a5a5a;
-    --cyan-bright: #0e7a7a;
+    /* Warm amber accents — declassified document */
+    --cyan-deep:   #221a06;
+    --cyan-mark:   #3b2d0d;
+    --cyan-glow:   #5a4a0a;
+    --cyan-bright: #7a6a0e;
 
     /* Winning amber — kept dark */
     --win-bg:      #1a1400;
@@ -157,9 +157,9 @@ body {
 .rounded-xl { border-radius: 0.75rem; }
 
 /* ---- Shadows — now glows ---- */
-.shadow-sm { box-shadow: 0 0 4px 0 rgba(10, 90, 90, 0.08); }
-.shadow-xl { box-shadow: 0 0 30px -5px rgba(10, 90, 90, 0.15); }
-.shadow-glow { box-shadow: 0 0 8px 2px rgba(10, 90, 90, 0.2); }
+.shadow-sm { box-shadow: 0 0 4px 0 rgba(90, 74, 10, 0.08); }
+.shadow-xl { box-shadow: 0 0 30px -5px rgba(90, 74, 10, 0.15); }
+.shadow-glow { box-shadow: 0 0 8px 2px rgba(90, 74, 10, 0.2); }
 .shadow-glow-win { box-shadow: 0 0 12px 2px rgba(74, 61, 0, 0.25); }
 
 .space-y-2 > * + * { margin-top: 0.5rem; }
@@ -185,7 +185,7 @@ body {
 
 /* ---- Hover brighten ---- */
 .hover-brighten { transition: color 0.3s ease, text-shadow 0.3s ease; }
-.hover-brighten:hover { color: var(--text-bright); text-shadow: 0 0 6px rgba(10, 90, 90, 0.3); }
+.hover-brighten:hover { color: var(--text-bright); text-shadow: 0 0 6px rgba(90, 74, 10, 0.3); }
 
 /* ---- Button resets ---- */
 button:active .active\:bg-gray-100 { background-color: var(--elevated); }
@@ -322,11 +322,58 @@ button:hover {
 
 /* ---- Marked square glow ---- */
 .glow-marked {
-    box-shadow: 0 0 6px 1px rgba(10, 90, 90, 0.25);
+    box-shadow: 0 0 6px 1px rgba(90, 74, 10, 0.25);
     border-color: var(--cyan-mark);
 }
 
 /* ---- Void overlay for modal ---- */
 .bg-void-overlay {
     background-color: rgba(0, 0, 0, 0.92);
+}
+
+/* ---- Border breathe — initiate button pulse ---- */
+@keyframes border-breathe {
+    0%, 100% {
+        box-shadow: 0 0 4px 1px rgba(90, 74, 10, 0.15);
+        border-color: var(--cyan-deep);
+    }
+    50% {
+        box-shadow: 0 0 14px 3px rgba(90, 74, 10, 0.4);
+        border-color: var(--cyan-mark);
+    }
+}
+
+.animate-border-breathe {
+    animation: border-breathe 3s ease-in-out infinite;
+}
+
+/* ---- Start screen decorative utilities ---- */
+.bg-crosshair-grid {
+    background-image:
+        repeating-linear-gradient(var(--cyan-deep) 0 1px, transparent 1px 100%),
+        repeating-linear-gradient(90deg, var(--cyan-deep) 0 1px, transparent 1px 100%);
+    background-size: 40px 40px;
+}
+
+.ornament-badge {
+    transform: translate(-50%, -50%);
+    color: var(--cyan-bright);
+    font-size: 0.7rem;
+    background: var(--surface);
+    padding: 0 0.5rem;
+    letter-spacing: 0.2em;
+}
+
+.ornament-badge-bottom {
+    transform: translate(-50%, 50%);
+    color: var(--cyan-bright);
+    font-size: 0.7rem;
+    background: var(--surface);
+    padding: 0 0.5rem;
+    letter-spacing: 0.2em;
+}
+
+.step-number {
+    color: var(--cyan-glow);
+    margin-right: 0.4rem;
 }
