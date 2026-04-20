@@ -5,7 +5,19 @@ description: CSS utility classes and styling practices for this Python/Jinja2 pr
 # CSS Styling Practices
 
 ## Overview
-This project uses custom CSS utility classes (similar to Tailwind) defined in `app/static/css/app.css`. These provide consistent, composable styling without external dependencies.
+This project uses custom CSS utility classes defined in `app/static/css/app.css` with a "Ghost Protocol" dark theme — near-black void palette with CSS variables, CRT scanline overlay, and ghost animations. Font: Share Tech Mono (Google Fonts).
+
+## CSS Variables (`:root`)
+```css
+/* Void palette */
+--void: #080808;   --surface: #0c0c0c;   --elevated: #111111;   --hairline: #1a1a1a;
+/* Ghost text — barely visible, brightens on interaction */
+--text-ghost: #1a1a1a;  --text-dim: #2a2a2a;  --text-vis: #3a3a3a;  --text-bright: #4a4a4a;
+/* Phosphor cyan accents */
+--cyan-deep: #062222;  --cyan-mark: #0d3b3b;  --cyan-glow: #0a5a5a;  --cyan-bright: #0e7a7a;
+/* Winning amber — kept dark */
+--win-bg: #1a1400;  --win-border: #2a2200;  --win-text: #3d3300;  --win-glow: #4a3d00;
+```
 
 ## Available Utilities
 
@@ -36,36 +48,44 @@ This project uses custom CSS utility classes (similar to Tailwind) defined in `a
 .min-h-[60px]
 ```
 
-### Colors
+### Colors (Ghost Protocol — all mapped to CSS variables)
 ```css
 /* Backgrounds */
-.bg-white, .bg-gray-50, .bg-gray-100
-.bg-amber-100, .bg-amber-200
-.bg-accent (primary blue: #2563eb)
-.bg-marked (light green: #dcfce7)
-.bg-black/50 (semi-transparent overlay)
+.bg-white (var(--surface))
+.bg-gray-50 (var(--void))
+.bg-gray-100 (var(--elevated))
+.bg-amber-100, .bg-amber-200 (var(--win-bg))
+.bg-accent (var(--cyan-deep), hover: var(--cyan-mark))
+.bg-marked (var(--cyan-deep))
+.bg-void-overlay (rgba(0,0,0,0.92))
 /* Text */
-.text-white
-.text-gray-500, .text-gray-600, .text-gray-700, .text-gray-800, .text-gray-900
-.text-green-600, .text-green-800
-.text-amber-500, .text-amber-800, .text-amber-900
+.text-white (var(--text-dim))
+.text-gray-500, .text-gray-600 (var(--text-ghost))
+.text-gray-700, .text-gray-800 (var(--text-dim))
+.text-gray-900 (var(--text-vis))
+.text-green-600 (var(--cyan-glow)), .text-green-800 (var(--cyan-mark))
+.text-amber-500 (var(--win-glow)), .text-amber-800, .text-amber-900 (var(--win-text))
 ```
 
 ### Typography
 ```css
-/* Size (only these exist — no text-base, text-xl, text-2xl, etc.) */
 .text-xs, .text-sm, .text-lg, .text-3xl, .text-4xl, .text-5xl
 .font-semibold, .font-bold
 .text-center, .text-left
 .leading-tight
+.uppercase, .tracking-widest, .tracking-wide
 ```
 
 ### Borders & Shadows
 ```css
 .border, .border-b
-.border-gray-200, .border-gray-300, .border-amber-400, .border-marked-border
+.border-gray-200, .border-gray-300 (var(--hairline))
+.border-amber-400 (var(--win-border))
+.border-marked-border (var(--cyan-deep))
 .rounded, .rounded-lg, .rounded-xl
-.shadow-sm, .shadow-xl
+.shadow-sm, .shadow-xl (cyan-tinted glows)
+.shadow-glow, .shadow-glow-win
+.glow-marked (cyan box-shadow + border)
 ```
 
 ### Positioning
@@ -81,27 +101,31 @@ This project uses custom CSS utility classes (similar to Tailwind) defined in `a
 .select-none
 .wrap-break-word
 .hyphens-auto
+.hover-brighten (brightens text + adds text-shadow on hover)
 ```
 
 ### Animation
 ```css
-.transition-all, .transition-colors
-.duration-150
-.animate-[bounce_0.5s_ease-out]
+.transition-all, .transition-colors (300ms)
+.animate-ghost-pulse (winning squares breathe)
+.animate-fade-from-void (modal entrance)
+.animate-grid-reveal (board squares appear)
+.delay-0 through .delay-24 (staggered grid reveal, 30ms increments)
 ```
 
 ## Best Practices
 
 1. **Compose utilities**: Combine classes for complex layouts
 2. **Add new utilities to app.css**: When needed, follow existing patterns
-3. **Use CSS variables**: For theming, define in `:root`
+3. **Use CSS variables**: All colors reference `:root` variables — override there for theming
 4. **Keep specificity low**: Utility classes should be single-purpose
+5. **Add `hover-brighten`** to text elements that should reveal on hover
 
 ## Example Component Styling
 ```html
 <div class="flex flex-col items-center justify-center min-h-full bg-gray-50">
-    <button class="px-6 py-3 bg-accent text-white rounded-lg font-semibold">
-        Start Game
+    <button class="px-6 py-3 bg-accent text-white rounded-lg font-semibold uppercase tracking-wide hover-brighten">
+        Initiate
     </button>
 </div>
 ```
